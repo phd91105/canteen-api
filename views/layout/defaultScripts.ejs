@@ -1,0 +1,49 @@
+<script src="/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/datepicker/bootstrap-datepicker.min.js"></script>
+<script src="/assets/js/datepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="/assets/plugins/global/plugins.bundle.js"></script>
+<script src="/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+<script src="/assets/js/scripts.bundle.js"></script>
+<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="/assets/js/bootstrap/bootstrap.min.js"></script>
+<script src="/assets/js/lib/jquery.validate.min.js"></script>
+<script src="/assets/js/lib/additional-methods.min.js"></script>
+<script src="/assets/js/custom/constants.js"></script>
+<script src="/assets/js/custom/custom.js"></script>
+<% if(typeof title !=='undefined' && title=='User List' ) { %>
+    <script src="/assets/js/pages/basic.js"></script>
+    <% if(session.user.userFlag==0) { %>
+        <script>addButton('New', '/user/add');</script>
+    <% } else { %>
+        <script>hideButton();</script>
+    <% } %>
+<% } %>
+<% if(typeof title !=='undefined' && title=='Food List') { %>
+    <script src="/assets/js/pages/food.js"></script>
+    <% if(session.user.userFlag==0) { %>
+        <script>addButton('New', '/food/add');</script>
+    <% } else { %>
+        <script>hideButton();</script>
+    <% } %>
+<% } %>
+<% if(typeof title !=='undefined' && title=='Order List') { %>
+    <script src="/assets/js/pages/order.js"></script>
+<% } %>
+<% if(typeof title !=='undefined' && title=='Category List') { %>
+    <script src="/assets/js/pages/food.js"></script>
+    <% if(session.user.userFlag==0) { %>
+        <script>addButton('New', '/cat/add');</script>
+    <% } else { %>
+        <script>hideButton();</script>
+    <% } %>
+<% } %>
+<% if(typeof title !=='undefined' && title=='Section List' ) { %>
+    <script src="/assets/js/pages/section.js"></script>
+<% } %>
+<% if(typeof title !=='undefined' && title=='User Register') { %>
+    <script src="/assets/js/custom/addForm.js"></script>
+<% } %> 
+<% if(typeof title !=='undefined' && title=='User Edit') { %>
+    <script src="/assets/js/custom/editForm.js"></script>
+<% } %>
+<script src="/assets/js/custom/leftmenu.js"></script>

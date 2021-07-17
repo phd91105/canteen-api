@@ -1,0 +1,56 @@
+<table class="table table-separate table-head-custom" id="kt_datatable_2" style="visibility: hidden">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Section ID</th>
+            <th>Section Name</th>
+            <th>Joining Date</th>
+            <th>User Flag</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% users.forEach((user)=>{ %>
+            <tr>
+                <td class="table-content">
+                    <%= user.id %>
+                </td>
+                <td class="table-content">
+                    <a href="/user/<%= user.id %>">
+                        <%= user.name %>
+                    </a>
+                </td>
+                <td class="table-content">
+                    <% if(session.user.userFlag==0) { %>
+                        <a href="mailto:<%= user.email %>">
+                            <%= user.email %>
+                        </a>
+                        <% } else { %>
+                            <%= user.email %>
+                                <% } %>
+                </td>
+                <td class="table-content">
+                    <%= user.sectionId %>
+                </td>
+                <td class="table-content">
+                    <%= _.get(user ,'section[0].name','') %>
+                </td>
+                <td class="table-content">
+                    <%= moment(user.joiningDate).format('YYYY/MM/DD') %>
+                </td>
+                <td class="table-content">
+                    <%= user.userFlag %>
+                </td>
+                <td class="table-content">
+                    <%= moment(user.createdAt).format('YYYY/MM/DD') %>
+                </td>
+                <td class="table-content">
+                    <%= moment(user.updatedAt).format('YYYY/MM/DD') %>
+                </td>
+            </tr>
+            <%}); %>
+    </tbody>
+</table>

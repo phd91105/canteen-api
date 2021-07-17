@@ -1,0 +1,42 @@
+<table class="table table-separate table-head-custom" id="kt_datatable_order">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>User Name</th>
+            <th>Table</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% orders.forEach((order)=>{ %>
+            <tr>
+                <td class="table-content">
+                    <a href="/order/<%= order.id %>">
+                        <%= order.id %>
+                    </a>
+                </td>
+                <td class="table-content">
+                    <%= _.get(order ,'user[0].name','') %>
+                </td>
+                <td class="table-content">
+                    <%= order?.tableId %>
+                </td>
+                <td class="table-content">
+                    <%= order?.status %>
+                </td>
+                <td class="table-content">
+                    <%= order?.total %>
+                </td>
+                <td class="table-content">
+                    <%= moment(order.createdAt).format('YYYY/MM/DD') %>
+                </td>
+                <td class="table-content">
+                    <%= moment(order.updatedAt).format('YYYY/MM/DD') %>
+                </td>
+            </tr>
+            <%}); %>
+    </tbody>
+</table>

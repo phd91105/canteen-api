@@ -1,0 +1,21 @@
+.container {
+  padding-top: 50px;
+  max-width: 380px;
+  margin: auto;
+}
+
+.error {
+  font-size: 12px;
+  font-weight: 500;
+  color: #f00;
+}
+
+.form-login {
+  border-width: 1px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+
+.form-label {
+  font-weight: 500;
+}

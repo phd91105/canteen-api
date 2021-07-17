@@ -1,0 +1,38 @@
+<div class="card card-custom col-lg-11">
+    <% alerts.forEach(function(alert) { %>
+        <div class="alert alert-custom alert-light-<%= alert.level %> fade show ml-5 mr-5 mt-5" role="alert">
+            <div class="alert-text">
+                <%= alert.message %>
+            </div>
+            <div class="alert-close">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="ki ki-close"></i></span>
+                </button>
+            </div>
+        </div>
+        <% }); %>
+
+            <div class="card-header flex-wrap border-0 pt-6 pb-0 ml-3">
+                <div class="card-title">
+                    <h3 class="card-label">User List </h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <%- include('../partials/_searchForm') %>
+                    <% if(users.length> 0) {%>
+                        <%- include('../partials/_dataTable') %>
+                            <% } else {%>
+                                <div id="noRecord" class="text-center"></div>
+                                <a href="/user/add">
+                                    <button class="btn btn-light-success buttons-csv" aria-controls="kt_datatable_2"
+                                        type="button">
+                                        <span>New</span>
+                                    </button>
+                                </a>
+                                <% } %>
+            </div>
+</div>
+
+<% session.alert=undefined %>
+    <%- contentFor('pageTitle') %>
+        User List

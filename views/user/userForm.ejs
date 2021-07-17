@@ -1,0 +1,231 @@
+<div class="card card-custom">
+    <% alerts.forEach(function(alert) { %>
+        <div class="alert alert-custom alert-light-danger fade show ml-5 mr-5 mt-5" role="alert">
+            <div class="alert-text">
+                <%= alert %>
+            </div>
+            <div class="alert-close">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="ki ki-close"></i></span>
+                </button>
+            </div>
+        </div>
+        <% }); %>
+            <div class="card-header flex-wrap border-0 pt-6 pb-0 ml-3">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        <%= title %>
+                    </h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <form action="<%= action %> " method="post" autocomplete="off" id="userForm">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-12 row align-items-center justify-content-between mb-6">
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">ID</span>
+                                        </div>
+                                        <div class="col-form-label ml-5 overflow-auto">
+                                            <label class="form-check-label" for="autoSizingCheck">
+                                                <%= _.get(user,'id','') %>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row align-items-center justify-content-between mb-6">
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Email</span>
+                                        </div>
+                                        <% if(session.user.userFlag==0) { %>
+                                            <input type="text" name="email" class="form-control" maxlength="255"
+                                                value="<%= alerts.length > 0 ? session.input.email : _.get(user,'email','') %>" />
+                                            <% } else { %>
+                                                <div class="col-form-label ml-5 overflow-auto">
+                                                    <label class="form-check-label" for="autoSizingCheck">
+                                                        <%= _.get(user,'email','') %>
+                                                    </label>
+                                                </div>
+                                                <% } %>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">User Name</span>
+                                        </div>
+                                        <% if(session.user.userFlag==0) { %>
+                                            <input type="text" name="name" class="form-control" maxlength="50"
+                                                value="<%= alerts.length > 0 ? session.input.name : _.get(user,'name','') %>"
+                                                autocomplete="new-username" />
+                                            <% } else { %>
+                                                <div class="col-form-label ml-5 overflow-auto">
+                                                    <label class="form-check-label" for="autoSizingCheck">
+                                                        <%= _.get(user,'name','') %>
+                                                    </label>
+                                                </div>
+                                                <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row align-items-center justify-content-between mb-3">
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">User Flag</span>
+                                        </div>
+                                        <% if(session.user.userFlag==0) { %>
+                                            <div class="col-form-label">
+                                                <div class="ml-9 radio-inline">
+                                                    <label class="radio radio-success">
+                                                        <input type="radio" id="admin" name="userFlag" value="0" />
+                                                        <span></span>
+                                                        Admin
+                                                    </label>
+                                                    <label class="radio radio-success">
+                                                        <input type="radio" id="user" name="userFlag" value="1" />
+                                                        <span></span>
+                                                        User
+                                                    </label>
+                                                    <script defer>
+                                                        $('[name=userFlag]').val(["<%= alerts.length > 0 ? session.input.userFlag : _.get(user,'userFlag','0') %>"])
+                                                    </script>
+                                                </div>
+                                            </div>
+                                            <% } else { %>
+                                                <div class="col-form-label ml-5 overflow-auto">
+                                                    <label class="form-check-label" for="autoSizingCheck">
+                                                        <%= _.get(user,'userFlag','')==0? 'Admin' : 'User' %>
+                                                    </label>
+                                                </div>
+                                                <% } %>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Section</span>
+                                        </div>
+                                        <% if(session.user.userFlag==0) { %>
+                                            <select class="form-control" name="sectionId">
+                                                <% sections.forEach(section=>{ %>
+                                                    <option value="<%= section.id %>">
+                                                        <%= section.name %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                            <script defer>
+                                                $('[name=sectionId]').val("<%= alerts.length > 0 ? session.input.sectionId : _.get(user,'sectionId','') %>");
+                                            </script>
+                                            <% } else { %>
+                                                <div class="col-form-label ml-5 overflow-auto">
+                                                    <label class="form-check-label" for="autoSizingCheck">
+                                                        <%= _.get(user,'section.name','') %>
+                                                    </label>
+                                                </div>
+                                                <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row align-items-center justify-content-between mb-3">
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0 pt-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Joining Date</span>
+                                        </div>
+                                        <% if(session.user.userFlag==0) { %>
+                                            <input type="text" name="joiningDate" class="form-control date"
+                                                id="kt_date_input"
+                                                value="<%= alerts.length> 0 ? session.input.joiningDate : _.get(user,'joiningDate','') %>" />
+                                            <% } else { %>
+                                                <div class="col-form-label ml-5 overflow-auto">
+                                                    <label class="form-check-label" for="autoSizingCheck">
+                                                        <%= moment(_.get(user,'joiningDate','')).format('YYYY/MM/DD') %>
+                                                    </label>
+                                                </div>
+                                                <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row align-items-center justify-content-between mb-3">
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0 pt-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Password</span>
+                                        </div>
+                                        <input type="password" name="password" class="form-control" maxlength="20"
+                                            autocomplete="new-password"
+                                            value="<%= alerts.length > 0 ? session.input.password : ''%>" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0 pt-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Password
+                                                Confirmation</span>
+                                        </div>
+                                        <input type="password" name="passwordConfirmation" class="form-control"
+                                            maxlength="20"
+                                            value="<%= alerts.length > 0 ? session.input.passwordConfirmation : ''%>" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="deleteError" class="error ml-5"></span>
+                        <div class="row align-items-center justify-content-center mr-3 mt-3">
+                            <% if(title=='User Register' ) {%>
+                                <button id="register" type="submit"
+                                    class="btn btn-light-primary px-6 font-weight-bold mr-3">Register</button>
+                                <% } else if (title=='User Edit' ) { %>
+                                    <button id="update" type="submit"
+                                        class="btn btn-light-primary px-6 font-weight-bold mr-3">Update</button>
+                                    <% if(session.user.id!=_.get(user,'id','')) { %>
+                                        <button type="button" class="btn btn-light-danger px-6 font-weight-bold mr-3"
+                                            data-toggle="modal" data-target="#exampleModalCenter">
+                                            Delete
+                                        </button>
+                                        <div class="modal fade" id="exampleModalCenter" data-backdrop="static"
+                                            tabindex="-1" role="dialog" aria-labelledby="staticBackdrop"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <h5>
+                                                            このUserを削除しますか？
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="/user/<%= _.get(user,'id','') %>/delete">
+                                                            <button type="button"
+                                                                class="btn btn-light-danger">OK</button>
+                                                        </a>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } else {%>
+                                            <button type="button"
+                                                class="btn btn-light-danger px-6 font-weight-bold mr-3"
+                                                onclick="deleteUserError()"> Delete </button>
+                                            <% } %>
+                                                <% } %>
+                                                    <a href="/users">
+                                                        <button type="button"
+                                                            class="btn btn-light-warning px-6 font-weight-bold mr-3">Cancel</button>
+                                                    </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+</div>
+
+<% session.alert=undefined %>
+    <%- contentFor('pageTitle') %>
+        <%= title %>

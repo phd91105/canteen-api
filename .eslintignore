@@ -1,0 +1,12 @@
+!.*
+coverage/
+junit/
+dist/
+mobiles/
+/node_modules/*
+**/node_modules/*
+!**/node_modules/some-package/
+migrations/
+public/
+webpack.*
+dist/*

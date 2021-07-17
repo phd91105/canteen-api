@@ -1,0 +1,67 @@
+<div class="mb-3">
+    <form action="/users" method="get" autocomplete="off" id="searchForm">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12 row align-items-center justify-content-between mb-3">
+                <div class="col-lg-6 col-sm-12 my-2 my-md-0">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">User Name</span>
+                        </div>
+                        <input type="text" name="name" class="form-control" value="<%= session.input.name %>"
+                            maxlength="50" />
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12 my-2 my-md-0">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">User Flag</span>
+                        </div>
+                        <div class="col-form-label">
+                            <div class="checkbox-inline">
+                                <label class="ml-9 checkbox checkbox-success">
+                                    <input type="checkbox" id="admin" name="userFlag" value="0" />
+                                    <span></span>
+                                    Admin
+                                </label>
+                                <label class="checkbox checkbox-success">
+                                    <input type="checkbox" id="user" name="userFlag" value="1" />
+                                    <span></span>
+                                    User
+                                </label>
+                            </div>
+                            <script defer>
+                                var selected = '<%= session.input.userFlag %>'.split(',');
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 row align-items-center justify-content-between mb-3">
+                <div class="col-lg-6 col-sm-12 my-2 my-md-0 pt-2">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Joining Date From </span>
+                        </div>
+                        <input type="text" name="joiningDateFrom" class="form-control date" id="kt_date_input"
+                            value="<%= session.input.joiningDateFrom %>" />
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12 my-2 my-md-0 pt-2">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Joining Date To</span>
+                        </div>
+                        <input type="text" name="joiningDateTo" class="form-control date" id="kt_date_input2"
+                            value="<%= session.input.joiningDateTo %>" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span id="dateError" class="error ml-5"></span>
+        <div class="row align-items-center justify-content-end mr-3 mt-3">
+            <button type="submit" class="btn btn-light-primary px-6 font-weight-bold mr-3">Search</button>
+            <button type="button" class="btn btn-light-warning px-6 font-weight-bold"
+                onclick="resetSearchForm();">Clear</button>
+        </div>
+    </form>
+</div>

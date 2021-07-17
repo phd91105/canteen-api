@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>
+        <%= typeof pageTitle !=='undefined' ? pageTitle : '' %>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap/responsive.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/datepicker/bootstrap-datepicker.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/datepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap/dataTables.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/custom/style.css">
+    <link rel="stylesheet" href="/assets/font/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="/assets/font/pe-icon-7-stroke/css/helper.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/js/lib/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <%- include('./defaultHeader') %>
+        <section class="body d-flex">
+            <div id="left-menu">
+                <%- include('./defaultLeftMenu') %>
+            </div>
+            <div class="content">
+                <div class="row justify-content-center">
+                    <%- body %>
+                </div>
+            </div>
+        </section>
+        <%- include('./defaultScripts') %>
+        <%- script %>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<table class="table table-separate table-head-custom" id="kt_datatable_order">
+    <thead>
+        <tr>
+            <th>Food Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let i=0; i<orderItems.order_details.length; i++) { %>
+            <tr>
+                <td class="table-content">
+                    <%= orderItems.order_details[i].food.name %>
+                </td>
+                <td class="table-content">
+                    <%= orderItems.order_details[i].food.price %>
+                </td>
+                <td class="table-content">
+                    <%= orderItems.order_details[i].quantity %>
+                </td>
+            </tr>
+            <% } %>
+    </tbody>
+</table>

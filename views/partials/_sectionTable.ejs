@@ -1,0 +1,44 @@
+<table class="table table-separate table-head-custom" id="kt_datatable_section">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Section Name</th>
+            <th>Remarks</th>
+            <th>Leader Name</th>
+            <th>Floor Number</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Deleted At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% sections.forEach((section)=>{ %>
+            <tr>
+                <td class="table-content">
+                    <%= _.get(section,'id','') %>
+                </td>
+                <td class="table-content">
+                    <%= _.get(section,'name','') %>
+                </td>
+                <td class="table-content">
+                    <%= _.get(section,'remarks','') %>
+                </td>
+                <td class="table-content">
+                    <%= _.get(section,'leader[0].name','') %>
+                </td>
+                <td class="table-content">
+                    <%= _.get(section,'floorNum','') %>
+                </td>
+                <td class="table-content">
+                    <%= moment(section.createdAt).format('YYYY/MM/DD HH:mm:ss') %>
+                </td>
+                <td class="table-content">
+                    <%= moment(section.updatedAt).format('YYYY/MM/DD HH:mm:ss') %>
+                </td>
+                <td class="table-content">
+                    <%= section.deletedAt !=null ? moment(section.deletedAt).format('YYYY/MM/DD HH:mm:ss') : '' %>
+                </td>
+            </tr>
+            <% }); %>
+    </tbody>
+</table>

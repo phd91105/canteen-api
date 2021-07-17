@@ -1,0 +1,125 @@
+<div class="card card-custom">
+    <% alerts.forEach(function(alert) { %>
+        <div class="alert alert-custom alert-light-danger fade show ml-5 mr-5 mt-5" role="alert">
+            <div class="alert-text">
+                <%= alert %>
+            </div>
+            <div class="alert-close">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="ki ki-close"></i></span>
+                </button>
+            </div>
+        </div>
+        <% }); %>
+            <div class="card-header flex-wrap border-0 pt-6 pb-0 ml-3">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        <%= title %>
+                    </h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <form action="<%= action %>" method="post" autocomplete="off" id="foodForm"
+                        enctype="multipart/form-data">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-12 row align-items-center justify-content-between mb-6">
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">ID</span>
+                                        </div>
+                                        <div class="col-form-label ml-5 overflow-auto">
+                                            <label class="form-check-label" for="autoSizingCheck">
+                                                <%= _.get(category,'id','') %>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row align-items-center justify-content-between mb-6">
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Category Name</span>
+                                        </div>
+                                        <input type="text" name="name" class="form-control" maxlength="255"
+                                            value="<%= alerts.length > 0 ? session.input.name : _.get(category,'name','') %>" />
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Category Details</span>
+                                        </div>
+                                        <textarea type="text" name="details" class="form-control" rows="4"
+                                            autocomplete="new-username"><%= alerts.length > 0 ? session.input.details : _.get(category,'details','') %></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row align-items-center justify-content-between mb-3">
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0 pt-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Image</span>
+                                        </div>
+                                        <input type="file" name="image" class="form-control p-2"
+                                            value="<%= alerts.length> 0 ? session.input.image : _.get(category,'image','') %>" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="deleteError" class="error ml-5"></span>
+                        <div class="row align-items-center justify-content-center mr-3 mt-3">
+                            <% if(title=='Add Category' ) {%>
+                                <button id="register" type="submit"
+                                    class="btn btn-light-primary px-6 font-weight-bold mr-3">Add</button>
+                                <% } else if (title=='Edit Category' ) { %>
+                                    <button id="update" type="submit"
+                                        class="btn btn-light-primary px-6 font-weight-bold mr-3">Update</button>
+                                    <% if(session.category?.id!=_.get(category,'id','')) { %>
+                                        <button type="button" class="btn btn-light-danger px-6 font-weight-bold mr-3"
+                                            data-toggle="modal" data-target="#exampleModalCenter">
+                                            Delete
+                                        </button>
+                                        <div class="modal fade" id="exampleModalCenter" data-backdrop="static"
+                                            tabindex="-1" role="dialog" aria-labelledby="staticBackdrop"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <h5>
+                                                            Delete ?
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="/cat/<%= _.get(category,'id','') %>/delete">
+                                                            <button type="button"
+                                                                class="btn btn-light-danger">OK</button>
+                                                        </a>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } else {%>
+                                            <button type="button"
+                                                class="btn btn-light-danger px-6 font-weight-bold mr-3"
+                                                onclick="deleteUserError()"> Delete </button>
+                                            <% } %>
+                                                <% } %>
+                                                    <a href="/categories">
+                                                        <button type="button"
+                                                            class="btn btn-light-warning px-6 font-weight-bold mr-3">Cancel</button>
+                                                    </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+</div>
+
+<% session.alert=undefined %>
+    <%- contentFor('pageTitle') %>
+        <%= title %>

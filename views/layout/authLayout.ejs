@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/custom/auth.css" rel="stylesheet" />
+    <title>
+        <%= typeof pageTitle !=='undefined' ? pageTitle : '' %>
+    </title>
+</head>
+
+<body>
+    <%- body %>
+        <script src="/assets/js/lib/jquery-3.6.0.min.js"></script>
+        <script src="/assets/js/bootstrap/bootstrap.min.js"></script>
+        <script src="/assets/js/lib/jquery.validate.min.js"></script>
+        <script src="/assets/js/lib/additional-methods.min.js"></script>
+        <script src="/assets/js/custom/constants.js"></script>
+        <script src="/assets/js/custom/auth.js"></script>
+</body>
+
+</html>

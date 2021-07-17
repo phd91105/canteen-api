@@ -1,0 +1,38 @@
+<table class="table table-separate table-head-custom" id="kt_datatable_food">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Category Name</th>
+            <th>Details</th>
+            <th>Image</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% categories.forEach((cat)=>{ %>
+            <tr>
+                <td class="table-content">
+                    <%= cat.id %>
+                </td>
+                <td class="table-content">
+                    <a href="/cat/<%= cat.id %>">
+                        <%= cat.name %>
+                    </a>
+                </td>
+                <td class="table-content">
+                    <%= cat?.details %>
+                </td>
+                <td class="table-content">
+                    <img src="uploads/<%= cat?.image %>" width="50" height="50">
+                </td>
+                <td class="table-content">
+                    <%= moment(cat.createdAt).format('YYYY/MM/DD') %>
+                </td>
+                <td class="table-content">
+                    <%= moment(cat.updatedAt).format('YYYY/MM/DD') %>
+                </td>
+            </tr>
+            <%}); %>
+    </tbody>
+</table>

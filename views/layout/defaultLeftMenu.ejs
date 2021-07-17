@@ -1,0 +1,24 @@
+<% var menuItems=session.user.userFlag==0 ? [{ title:"Order List", link: "/orders" },{ title:"User List", link: "/users"
+  }, { title:"Section List", link: "/sections" }, { title:"Food List", link: "/foods" }, { title:"Category List",
+  link: "/categories" }] : [{ title:"User List", link: "/users" }] %>
+  <i class="btn-toggle-hamburger-menu pe-7s-menu pe-2x d-block d-lg-none"></i>
+  <div class="overlay"></div>
+  <div class="left-menu order-2 order-lg-0">
+    <i class="btn-toggle-sidenav pe-7s-angle-left d-none d-lg-block"></i>
+    <div class="left-menu-item text-center d-block d-lg-none my-2">
+      <div class="text-header header-username w-100">
+      </div>
+    </div>
+    <% menuItems.forEach(item=> { %>
+      <div class="left-menu-item left-menu-item-first mt-5">
+        <a href="<%= item.link %>">
+          <span class="left-menu-item-label">
+            <%= item.title %>
+          </span>
+        </a>
+      </div>
+      <% }) %>
+        <div class="left-menu-item display-none" id="logout-menu-item">
+          <a href="#"> </a>
+        </div>
+  </div>
