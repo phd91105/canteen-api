@@ -1,10 +1,12 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, Unique } from 'typeorm';
 import { UserRole } from '../constants';
 import { Base } from './base.model';
 
 @Entity({ name: 'user' })
+@Unique(['username'])
+@Unique(['email'])
 export class User extends Base {
-  @Column({ name: 'username', type: 'varchar', nullable: false, unique: true })
+  @Column({ name: 'username', type: 'varchar', nullable: false })
   public username: string;
 
   @Column({
@@ -12,7 +14,6 @@ export class User extends Base {
     type: 'varchar',
     length: 255,
     nullable: false,
-    unique: true,
   })
   public email: string;
 
