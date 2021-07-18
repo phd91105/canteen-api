@@ -41,4 +41,14 @@ async function removeFromCart(req: Request, res: Response): Promise<Response> {
   return res.json({ message: 'Deleted cart item' }).status(200);
 }
 
-export { getCartList, addToCart, updateCart, removeFromCart };
+async function resetCart(req: Request, res: Response): Promise<Response> {
+  await getRepository(Cart)
+    .createQueryBuilder()
+    .delete()
+    .from(Cart)
+    .where({ userId: extractJWT(<string>req.headers!.authorization).uid })
+    .execute();
+  return res.json({ message: 'Reset cart success' }).status(200);
+}
+
+export { getCartList, addToCart, updateCart, removeFromCart, resetCart };
