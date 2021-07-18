@@ -75,7 +75,7 @@ function renderResetPassword(req: Request, res: Response): void {
     });
   } catch (error) {
     errorLog(req, error);
-    res.send({ msg: 'Invalid token' });
+    res.send({ msg: 'Invalid token' }).status(400);
   }
 }
 

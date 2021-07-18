@@ -4,19 +4,17 @@ import { connectdb } from '../../config/db.config';
 import { OrderStatus } from '../../constants';
 import { Order } from '../../models/order.model';
 import { OrderDetails } from '../../models/orderDetails.model';
-import { User } from '../../models/user.model';
 import { extractJWT } from '../../utils/jwt';
 
 async function getOrderList(req: Request, res: Response): Promise<Response> {
   const orders = await getRepository(Order)
     .createQueryBuilder('order')
-    .leftJoinAndMapMany('order.user', User, 'user', 'order.userId = user.id')
     .orderBy({
       'order.id': 'DESC',
     })
     .where({ userId: extractJWT(<string>req.headers!.authorization).uid })
     .getMany();
-  return res.json(orders);
+  return res.json(orders).status(200);
 }
 
 async function createOrder(req: Request, res: Response): Promise<Response> {
@@ -36,7 +34,7 @@ async function createOrder(req: Request, res: Response): Promise<Response> {
   order.status = OrderStatus.WAITING;
   order.orderDetails = orderDetailsArray;
   const createOrder = await (await connectdb).manager.save(order);
-  return res.json(createOrder);
+  return res.json(createOrder).status(200);
 }
 
 export { getOrderList, createOrder };

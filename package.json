@@ -22,6 +22,7 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
+    "dateformat": "^4.5.1",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
@@ -35,12 +36,14 @@
     "nodemailer": "^6.6.3",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.34",
+    "vn-payments": "^1.1.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.10",
+    "@types/dateformat": "^3.0.1",
     "@types/ejs": "^3.0.6",
     "@types/express": "^4.17.12",
     "@types/express-ejs-layouts": "^2.3.2",
