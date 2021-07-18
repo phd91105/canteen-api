@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import { connectdb } from '../../config/db.config';
 import { OrderStatus } from '../../constants';
+import { Cart } from '../../models/cart.model';
 import { Order } from '../../models/order.model';
 import { OrderDetails } from '../../models/orderDetails.model';
 import { extractJWT } from '../../utils/jwt';
@@ -34,6 +35,12 @@ async function createOrder(req: Request, res: Response): Promise<Response> {
   order.status = OrderStatus.WAITING;
   order.orderDetails = orderDetailsArray;
   const createOrder = await (await connectdb).manager.save(order);
+  await getRepository(Cart)
+    .createQueryBuilder()
+    .delete()
+    .from(Cart)
+    .where({ userId: extractJWT(<string>req.headers!.authorization).uid })
+    .execute();
   return res.json(createOrder).status(200);
 }
 
