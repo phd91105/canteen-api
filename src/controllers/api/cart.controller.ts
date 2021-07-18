@@ -7,7 +7,7 @@ import { extractJWT } from '../../utils/jwt';
 async function getCartList(req: Request, res: Response): Promise<Response> {
   const cartList = await getRepository(Cart)
     .createQueryBuilder('cart')
-    .leftJoinAndMapMany('cart.food', Food, 'food', 'cart.foodId = food.id')
+    .leftJoinAndMapOne('cart.food', Food, 'food', 'cart.foodId = food.id')
     .orderBy({
       'cart.createdAt': 'DESC',
     })
