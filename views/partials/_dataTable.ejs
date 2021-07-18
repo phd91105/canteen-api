@@ -4,10 +4,8 @@
             <th>ID</th>
             <th>User Name</th>
             <th>Email</th>
-            <th>Section ID</th>
-            <th>Section Name</th>
-            <th>Joining Date</th>
             <th>User Flag</th>
+            <th>Joining Date</th>
             <th>CreatedAt</th>
             <th>UpdatedAt</th>
         </tr>
@@ -33,16 +31,10 @@
                                 <% } %>
                 </td>
                 <td class="table-content">
-                    <%= user.sectionId %>
-                </td>
-                <td class="table-content">
-                    <%= _.get(user ,'section[0].name','') %>
+                    <%= user.userFlag %>
                 </td>
                 <td class="table-content">
                     <%= moment(user.joiningDate).format('YYYY/MM/DD') %>
-                </td>
-                <td class="table-content">
-                    <%= user.userFlag %>
                 </td>
                 <td class="table-content">
                     <%= moment(user.createdAt).format('YYYY/MM/DD') %>

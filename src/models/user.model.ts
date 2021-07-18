@@ -23,7 +23,7 @@ export class User extends Base {
   @Column({ name: 'name', type: 'varchar', length: 50, nullable: false })
   public name: string;
 
-  @Column({ name: 'sectionId', type: 'bigint', nullable: false })
+  @Column({ name: 'sectionId', type: 'bigint', nullable: true })
   public sectionId: number;
 
   @Column({ name: 'joiningDate', type: 'date', nullable: false })

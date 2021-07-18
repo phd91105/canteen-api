@@ -8,6 +8,7 @@ import { transformError } from '../../utils/validator';
 import bcrypt from 'bcrypt';
 import { extractJWT, signJWT } from '../../utils/jwt';
 import { sendMail } from '../../utils/mailer';
+import { UserRole } from '../../constants';
 
 async function login(req: Request, res: Response): Promise<void> {
   const reqLogin = new LoginDTO(req.body);
@@ -42,10 +43,12 @@ async function register(req: Request, res: Response): Promise<void> {
   try {
     const user = await getRepository(User).save({
       ...req.body,
+      joiningDate: new Date(),
+      role: UserRole.USER,
       password: bcrypt.hashSync(req.body.password, 12),
     });
     res.json({ message: 'Registration success', user }).status(200);
-  } catch {
+  } catch (error) {
     res.json({ error: 'User already exist' }).status(400);
   }
 }

@@ -25,6 +25,17 @@ var table = $('#kt_datatable_order').DataTable({
   ],
   columnDefs: [
     {
+      targets: 2,
+      width: '75px',
+      render: function (data) {
+        return (
+          '<span class="label label-lg font-weight-bold label-light-secondary text-info label-inline">' +
+          data +
+          '</span>'
+        );
+      },
+    },
+    {
       targets: 3,
       width: '75px',
       render: function (data, type) {

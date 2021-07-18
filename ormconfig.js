@@ -8,7 +8,7 @@ module.exports = {
   username: DB_USERNAME,
   password: DB_PASSWORD,
   database: DATABASE_NAME,
-  synchronize: false,
+  synchronize: true,
   logging: false,
   entities: ['src/models/**/*.ts'],
   migrations: ['src/migrations/**/*.ts'],

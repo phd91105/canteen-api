@@ -35,10 +35,6 @@ var table = $('#kt_datatable_2').DataTable({
   columnDefs: [
     {
       targets: 3,
-      visible: false,
-    },
-    {
-      targets: 6,
       width: '75px',
       render: function (data, type) {
         var flag = {
@@ -60,30 +56,11 @@ var table = $('#kt_datatable_2').DataTable({
         );
       },
     },
-    {
-      targets: 7,
-      visible: false,
-    },
-    {
-      targets: 8,
-      visible: false,
-    },
   ],
 });
 
 jQuery(document).ready(function () {
   $('.dataTables_filter').remove();
-  $.fn.dataTable.ext.search.push(function (
-    settings,
-    searchData,
-    index,
-    rowData,
-  ) {
-    if (rowData[4]) {
-      return true;
-    }
-    return false;
-  });
   table.draw();
   if ($('.dataTables_empty').html() == Message.INFO.ICL001) {
     $('#kt_datatable_2_wrapper').remove();
