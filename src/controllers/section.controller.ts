@@ -2,26 +2,19 @@ import { Request, Response } from 'express';
 import { getRepository, QueryRunner } from 'typeorm';
 import { connectdb } from '../config/db.config';
 import { Section } from '../models/section.model';
-import { User } from '../models/user.model';
+import { ImportSectionDTO } from '../dto/import-section.dto';
+import { validateSync } from 'class-validator';
+import { transformError } from '../utils/validator';
 import lodash from 'lodash';
 import moment from 'moment';
 import fs from 'fs';
 import csv from 'csv-parser';
-import { ImportSectionDTO } from '../dto/import-section.dto';
-import { validateSync } from 'class-validator';
-import { transformError } from '../utils/validator';
 
 async function getSectionList(req: Request, res: Response): Promise<void> {
   try {
     const sectionRepository = getRepository(Section);
     const sections = await sectionRepository
       .createQueryBuilder('section')
-      .leftJoinAndMapMany(
-        'section.leader',
-        User,
-        'user',
-        'section.leaderId = user.id',
-      )
       .orderBy({ 'section.id': 'ASC' })
       .withDeleted()
       .getMany();

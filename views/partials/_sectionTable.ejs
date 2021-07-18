@@ -3,9 +3,6 @@
         <tr>
             <th>ID</th>
             <th>Section Name</th>
-            <th>Remarks</th>
-            <th>Leader Name</th>
-            <th>Floor Number</th>
             <th>Created At</th>
             <th>Updated At</th>
             <th>Deleted At</th>
@@ -19,15 +16,6 @@
                 </td>
                 <td class="table-content">
                     <%= _.get(section,'name','') %>
-                </td>
-                <td class="table-content">
-                    <%= _.get(section,'remarks','') %>
-                </td>
-                <td class="table-content">
-                    <%= _.get(section,'leader[0].name','') %>
-                </td>
-                <td class="table-content">
-                    <%= _.get(section,'floorNum','') %>
                 </td>
                 <td class="table-content">
                     <%= moment(section.createdAt).format('YYYY/MM/DD HH:mm:ss') %>
