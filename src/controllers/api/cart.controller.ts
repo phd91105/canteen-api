@@ -18,12 +18,24 @@ async function getCartList(req: Request, res: Response): Promise<Response> {
 
 async function addToCart(req: Request, res: Response): Promise<Response> {
   const { foodId, quantity } = req.body;
-  const cart = await getRepository(Cart).save({
+  const cart = await getRepository(Cart).findOne({
     foodId,
-    quantity,
     userId: +extractJWT(<string>req.headers!.authorization).uid,
   });
-  return res.json(cart).status(200);
+  if (cart) {
+    const updatedCart = await getRepository(Cart).update(
+      { quantity: cart.quantity + quantity },
+      { id: cart.id },
+    );
+    return res.json(updatedCart).status(200);
+  } else {
+    const updatedCart = await getRepository(Cart).save({
+      foodId,
+      quantity,
+      userId: +extractJWT(<string>req.headers!.authorization).uid,
+    });
+    return res.json(updatedCart).status(200);
+  }
 }
 
 async function updateCart(req: Request, res: Response): Promise<Response> {
