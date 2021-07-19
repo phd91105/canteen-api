@@ -4,6 +4,7 @@ import dateFormat from 'dateformat';
 import { Order } from '../../models/order.model';
 import { getRepository } from 'typeorm';
 import { OrderStatus } from '../../constants';
+import { extractJWT, signJWT } from '../../utils/jwt';
 import 'dotenv/config';
 
 const { VNP_MERCHANT, VNP_SECRET, VNP_RETURN } = process.env;
@@ -19,6 +20,7 @@ async function vnpayCheckout(req: Request, res: Response): Promise<void> {
       merchant: <string>VNP_MERCHANT,
       secureSecret: <string>VNP_SECRET,
     });
+    const orderToken = signJWT({ orderId }, '10m');
     const date = new Date();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const checkoutPayload: any = {
@@ -28,11 +30,11 @@ async function vnpayCheckout(req: Request, res: Response): Promise<void> {
       locale: 'vn',
       currency: 'VND',
       orderId: `express-${dateFormat(date, 'HHmmss')}`,
-      orderInfo: orderId,
+      orderInfo: orderToken,
       orderType: 'food',
       returnUrl: VNP_RETURN,
       transactionId: `express-${dateFormat('HHmmss')}`,
-      customerId: 'customerId',
+      customerId: order.userId,
       bankCode: 'NCB',
     };
     const url = (await vnpay.buildCheckoutUrl(checkoutPayload)).toString();
@@ -45,10 +47,16 @@ async function vnpayCheckout(req: Request, res: Response): Promise<void> {
 }
 
 async function vnpayCallback(req: Request, res: Response): Promise<void> {
-  await getRepository(Order).update(+(<string>req.query.vnp_OrderInfo), {
-    status: OrderStatus.PAID,
-  });
-  res.json({ message: 'Paid success' }).status(200);
+  const { vnp_OrderInfo } = req.query as { [key: string]: string };
+  try {
+    await getRepository(Order).update(extractJWT(vnp_OrderInfo).orderId, {
+      status: OrderStatus.PAID,
+    });
+    res.json({ message: 'Paid success' }).status(200);
+  } catch (error) {
+    res.status(400);
+    res.json({ message: 'Bad request' });
+  }
 }
 
 export { vnpayCheckout, vnpayCallback };
