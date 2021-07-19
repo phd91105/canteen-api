@@ -35,10 +35,10 @@ async function login(req: Request, res: Response): Promise<Response> {
       return res.json({ message: 'Login successful', token }).status(200);
     } else if (!user) {
       res.status(400);
-      return res.json({ error: 'Invalid Username' });
+      return res.json({ message: 'Invalid Username' });
     } else {
       res.status(400);
-      return res.json({ error: 'Invalid Password' });
+      return res.json({ message: 'Invalid Password' });
     }
   }
 }
