@@ -18,7 +18,8 @@ export const uploadFile = (
 ): void => {
   upload(req, res, function (err) {
     if (err) {
-      return res.status(400).json({ error: err.message });
+      res.status(400);
+      return res.json({ error: err.message });
     } else next();
   });
 };

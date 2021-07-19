@@ -9,14 +9,14 @@ export function authenticate(
 ): void {
   if (!req.headers!.authorization) {
     errorLog(req, 'unauthorized');
-    res.status(400).json({ message: 'Unauthorized' });
+    res.status(401).json({ message: 'Unauthorized' });
     return;
   } else {
     try {
       extractJWT(req.headers!.authorization);
     } catch {
       errorLog(req, 'unauthorized');
-      res.status(400).json({ message: 'Unauthorized' });
+      res.status(401).json({ message: 'Unauthorized' });
       return;
     }
   }

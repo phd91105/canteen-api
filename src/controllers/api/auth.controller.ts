@@ -34,7 +34,8 @@ async function login(req: Request, res: Response): Promise<void> {
       infoLog(req, 'Login successful');
       res.json({ message: 'Login successful', token }).status(200);
     } else {
-      res.json({ error: 'Invalid email or password' }).status(400);
+      res.status(400);
+      res.json({ error: 'Invalid email or password' });
     }
   }
 }
@@ -49,7 +50,8 @@ async function register(req: Request, res: Response): Promise<void> {
     });
     res.json({ message: 'Registration success', user }).status(200);
   } catch (error) {
-    res.json({ error: 'User already exist' }).status(400);
+    res.status(400);
+    res.json({ error: 'User already exist' });
   }
 }
 
@@ -64,7 +66,8 @@ async function sendResetLink(req: Request, res: Response): Promise<void> {
     infoLog(req, `Send reset password link to email ${email}`);
     res.json({ success: true }).status(200);
   } catch (error) {
-    res.json({ error: 'User is not exist' }).status(400);
+    res.status(400);
+    res.json({ error: 'User is not exist' });
   }
 }
 
@@ -78,7 +81,8 @@ function renderResetPassword(req: Request, res: Response): void {
     });
   } catch (error) {
     errorLog(req, error);
-    res.send({ msg: 'Invalid token' }).status(400);
+    res.status(400);
+    res.send({ msg: 'Invalid token' });
   }
 }
 

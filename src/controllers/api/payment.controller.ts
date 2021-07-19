@@ -38,7 +38,8 @@ async function vnpayCheckout(req: Request, res: Response): Promise<void> {
     const url = (await vnpay.buildCheckoutUrl(checkoutPayload)).toString();
     return res.redirect(url);
   } else {
-    res.json({ message: 'Bad request' }).status(400);
+    res.status(400);
+    res.json({ message: 'Bad request' });
     return;
   }
 }
