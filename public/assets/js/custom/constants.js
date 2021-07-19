@@ -1,27 +1,17 @@
 const Message = {
   INFO: {
     ICL001: 'No record.',
-    ECL012: (column, params1, params2) =>
-      `${column}は${params1}文字以上で入力してください。（現在${params2}文字）`,
-    ECL013: '会員IDまたはメールアドレスが間違っています。',
-    ICL017: (column) => `この${column}を削除しますか？`,
   },
   ERROR: {
-    ECL002: (column) => `${column}は必須項目です。`,
-    ECL003: (column) => `${column}は全角で入力してください。`,
-    ECL004: (column) => `${column}は全角カナで入力してください。`,
-    ECL005: (column) => `${column}は半角英数で入力してください。`,
-    ECL006: (column) => `${column}は数字を正しく入力してください。`,
-    ECL007: 'メールアドレスを正しく入力してください。',
-    ECL008: (column) => `${column}は日付を正しく入力してください。`,
-    ECL009: (column) => `${column}は郵便番号を正しく入力してください。`,
-    ECL010: (column) => `${column}は電話番号を正しく入力してください。`,
-    ECL011: `{0}は{1}文字以下で入力してください。（現在{2}文字）`,
-    ECL014:
-      '入力した情報のいずれかの情報が間違っています。確認してから再度試してください。',
-    ECL015: 'パスワードは半角英数字記号で8～20文字で入力してください。',
-    ECL016: '確認用のパスワードが間違っています。',
-    ECL018: '解約予定日は契約終了日前を指定してください。',
-    ECL019: 'すでに証明書番号は登録されています。',
+    ECL002: (column) => `${column} should not be empty`,
+    ECL005: (column) => `${column} is invalid format`,
+    ECL006: (column) => `${column} must be a number`,
+    ECL007: 'invalid email format',
+    ECL011: (column, params1, params2) =>
+      `${column}: ${params1} is maximum length (current: ${params2} char）`,
+    ECL014: 'Invalid Email or Password',
+    ECL015:
+      'Please enter the password in 8 to 20 single-byte alphanumeric characters.',
+    ECL016: 'The confirmation password is incorrect.',
   },
 };

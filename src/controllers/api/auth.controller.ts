@@ -48,7 +48,7 @@ async function register(req: Request, res: Response): Promise<Response> {
     const user = await getRepository(User).save({
       ...req.body,
       joiningDate: new Date(),
-      role: UserRole.USER,
+      userFlag: UserRole.USER,
       password: bcrypt.hashSync(req.body.password, 12),
     });
     return res.json({ message: 'Registration success', user }).status(200);

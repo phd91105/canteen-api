@@ -21,6 +21,10 @@ export class CreateUserDTO {
   })
   email: string;
 
+  @IsNotEmpty({ message: Message.ERROR.ECL002('Name') })
+  @IsString()
+  username: string;
+
   @IsNotEmpty({ message: Message.ERROR.ECL002('User Name') })
   @IsString()
   @MaxLength(50, {
