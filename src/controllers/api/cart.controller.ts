@@ -23,10 +23,9 @@ async function addToCart(req: Request, res: Response): Promise<Response> {
     userId: +extractJWT(<string>req.headers!.authorization).uid,
   });
   if (cart) {
-    const updatedCart = await getRepository(Cart).update(
-      { quantity: cart.quantity + quantity },
-      { id: cart.id },
-    );
+    const updatedCart = await getRepository(Cart).update(cart.id, {
+      quantity: cart.quantity + quantity,
+    });
     return res.json(updatedCart).status(200);
   } else {
     const updatedCart = await getRepository(Cart).save({
