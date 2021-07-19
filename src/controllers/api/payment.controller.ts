@@ -46,16 +46,16 @@ async function vnpayCheckout(req: Request, res: Response): Promise<void> {
   }
 }
 
-async function vnpayCallback(req: Request, res: Response): Promise<void> {
+async function vnpayCallback(req: Request, res: Response): Promise<Response> {
   const { vnp_OrderInfo } = req.query as { [key: string]: string };
   try {
     await getRepository(Order).update(extractJWT(vnp_OrderInfo).orderId, {
       status: OrderStatus.PAID,
     });
-    res.json({ message: 'Paid success' }).status(200);
+    return res.json({ message: 'Paid success' }).status(200);
   } catch (error) {
     res.status(400);
-    res.json({ message: 'Bad request' });
+    return res.json({ message: 'Bad request' });
   }
 }
 

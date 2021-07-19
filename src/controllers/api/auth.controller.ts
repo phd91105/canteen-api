@@ -10,11 +10,11 @@ import { extractJWT, signJWT } from '../../utils/jwt';
 import { sendMail } from '../../utils/mailer';
 import { UserRole } from '../../constants';
 
-async function login(req: Request, res: Response): Promise<void> {
+async function login(req: Request, res: Response): Promise<Response> {
   const reqLogin = new LoginDTO(req.body);
   const validateError = validateSync(reqLogin);
   if (validateError.length > 0) {
-    res.json({ messages: transformError(validateError) });
+    return res.json({ messages: transformError(validateError) });
   } else {
     const emailRegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     const isEmail = emailRegExp.test(reqLogin.user);
@@ -32,15 +32,18 @@ async function login(req: Request, res: Response): Promise<void> {
         '1d',
       );
       infoLog(req, 'Login successful');
-      res.json({ message: 'Login successful', token }).status(200);
+      return res.json({ message: 'Login successful', token }).status(200);
+    } else if (!user) {
+      res.status(400);
+      return res.json({ error: 'Invalid Username' });
     } else {
       res.status(400);
-      res.json({ error: 'Invalid email or password' });
+      return res.json({ error: 'Invalid Password' });
     }
   }
 }
 
-async function register(req: Request, res: Response): Promise<void> {
+async function register(req: Request, res: Response): Promise<Response> {
   try {
     const user = await getRepository(User).save({
       ...req.body,
@@ -48,14 +51,14 @@ async function register(req: Request, res: Response): Promise<void> {
       role: UserRole.USER,
       password: bcrypt.hashSync(req.body.password, 12),
     });
-    res.json({ message: 'Registration success', user }).status(200);
+    return res.json({ message: 'Registration success', user }).status(200);
   } catch (error) {
     res.status(400);
-    res.json({ error: 'User already exist' });
+    return res.json({ error: 'User already exist' });
   }
 }
 
-async function sendResetLink(req: Request, res: Response): Promise<void> {
+async function sendResetLink(req: Request, res: Response): Promise<Response> {
   const { email } = req.body;
   const user = await getRepository(User).findOne({
     email: email,
@@ -64,10 +67,10 @@ async function sendResetLink(req: Request, res: Response): Promise<void> {
     const token = signJWT({ uid: user!.id }, '5m');
     sendMail(email, token);
     infoLog(req, `Send reset password link to email ${email}`);
-    res.json({ success: true }).status(200);
+    return res.json({ success: true }).status(200);
   } catch (error) {
     res.status(400);
-    res.json({ error: 'User is not exist' });
+    return res.json({ error: 'User is not exist' });
   }
 }
 
@@ -79,21 +82,23 @@ function renderResetPassword(req: Request, res: Response): void {
       token: token,
       layout: 'layout/authLayout',
     });
+    return;
   } catch (error) {
     errorLog(req, error);
     res.status(400);
-    res.send({ msg: 'Invalid token' });
+    res.json({ message: 'Invalid token' });
+    return;
   }
 }
 
-async function resetPassword(req: Request, res: Response): Promise<void> {
+async function resetPassword(req: Request, res: Response): Promise<Response> {
   const { token } = req.query;
   const decoded = extractJWT(<string>token);
   await getRepository(User).update(decoded.uid, {
     password: bcrypt.hashSync(req.body.password, 12),
   });
   infoLog(req, 'Reset password success');
-  res.json({ message: 'Reset password success' }).status(200);
+  return res.json({ message: 'Reset password success' }).status(200);
 }
 
 export { login, register, sendResetLink, resetPassword, renderResetPassword };
