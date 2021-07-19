@@ -1,0 +1,14 @@
+{
+  "type": "mysql",
+  "host": "103.97.125.244",
+  "port": 3306,
+  "username": "phamduyt_1",
+  "password": "Tdpamm00",
+  "database": "phamduyt_cantin20210719",
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "synchronize": true,
+  "migrations": ["src/migrations/*.ts", "dist/migrations/*{.ts,.js}"],
+  "cli": {
+    "migrationsDir": "src/migrations"
+  }
+}
