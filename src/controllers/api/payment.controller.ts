@@ -34,7 +34,7 @@ async function vnpayCheckout(req: Request, res: Response): Promise<void> {
       orderType: 'food',
       returnUrl: VNP_RETURN,
       transactionId: `express-${dateFormat('HHmmss')}`,
-      customerId: order.userId,
+      customerId: `${order.userId}`,
       bankCode: 'NCB',
     };
     const url = (await vnpay.buildCheckoutUrl(checkoutPayload)).toString();
