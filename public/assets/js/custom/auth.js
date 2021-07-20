@@ -27,4 +27,31 @@ $(document).ready(() => {
     },
     errorClass: 'error is-invalid',
   });
+
+  $('#resetForm').validate({
+    submitHandler: function (form) {
+      $('#btnLogin')
+        .html('<span class="spinner-border spinner-border-sm"></span>')
+        .attr('disabled', 'disabled');
+      form.submit();
+    },
+    rules: {
+      password: {
+        required: true,
+      },
+      confirmPassword: {
+        required: true,
+        equalTo: '[name="password"]',
+      },
+    },
+    messages: {
+      password: {
+        required: Message.ERROR.ECL002('Password'),
+      },
+      confirmPassword: {
+        required: Message.ERROR.ECL002('Password Confirmation'),
+      },
+    },
+    errorClass: 'error is-invalid',
+  });
 });
