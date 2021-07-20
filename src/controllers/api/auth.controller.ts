@@ -54,7 +54,7 @@ async function register(req: Request, res: Response): Promise<Response> {
     return res.json({ message: 'Registration success', user }).status(200);
   } catch (error) {
     res.status(400);
-    return res.json({ error: 'User already exist' });
+    return res.json({ message: 'User already exist' });
   }
 }
 
@@ -70,7 +70,7 @@ async function sendResetLink(req: Request, res: Response): Promise<Response> {
     return res.json({ success: true }).status(200);
   } catch (error) {
     res.status(400);
-    return res.json({ error: 'User is not exist' });
+    return res.json({ message: 'User is not exist' });
   }
 }
 
