@@ -12,7 +12,7 @@ async function getOrderList(req: Request, res: Response): Promise<Response> {
   const orders = await getRepository(Order)
     .createQueryBuilder('order')
     .orderBy({
-      'order.id': 'DESC',
+      'order.createdAt': 'DESC',
     })
     .where({ userId: extractJWT(<string>req.headers!.authorization).uid })
     .getMany();

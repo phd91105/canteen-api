@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, ILike } from 'typeorm';
 import { Food } from '../../models/food.model';
 
 async function getFoodList(req: Request, res: Response): Promise<Response> {
-  const { cat_id } = req.query;
+  const { catid, foodname } = req.query;
   const foods = await getRepository(Food)
     .createQueryBuilder('food')
     .orderBy({
-      'food.name': 'ASC',
-      'food.id': 'ASC',
+      'food.createdAt': 'DESC',
     })
     .where({
-      ...(cat_id ? { catId: cat_id } : {}),
+      ...(catid ? { catId: catid } : {}),
+      ...(foodname ? { name: ILike(`%${foodname}%`) } : {}),
     })
     .getMany();
   return res.json(foods).status(200);
