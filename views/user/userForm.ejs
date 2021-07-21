@@ -60,13 +60,13 @@
                                             <span class="input-group-text" id="basic-addon1">User Name</span>
                                         </div>
                                         <% if(session.user.userFlag==0) { %>
-                                            <input type="text" name="name" class="form-control" maxlength="50"
-                                                value="<%= alerts.length > 0 ? session.input.name : _.get(user,'name','') %>"
+                                            <input type="text" name="username" class="form-control" maxlength="50"
+                                                value="<%= alerts.length > 0 ? session.input.username : _.get(user,'username','') %>"
                                                 autocomplete="new-username" />
                                             <% } else { %>
                                                 <div class="col-form-label ml-5 overflow-auto">
                                                     <label class="form-check-label" for="autoSizingCheck">
-                                                        <%= _.get(user,'name','') %>
+                                                        <%= _.get(user,'username','') %>
                                                     </label>
                                                 </div>
                                                 <% } %>
@@ -133,6 +133,24 @@
                                 </div>
                             </div>
                             <div class="col-12 row align-items-center justify-content-between mb-3">
+                                <div class="col-lg-6 col-sm-12 my-2 my-md-0">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Full Name</span>
+                                        </div>
+                                        <% if(session.user.userFlag==0) { %>
+                                            <input type="text" name="name" class="form-control" maxlength="50"
+                                                value="<%= alerts.length > 0 ? session.input.name : _.get(user,'name','') %>"
+                                                autocomplete="new-username" />
+                                            <% } else { %>
+                                                <div class="col-form-label ml-5 overflow-auto">
+                                                    <label class="form-check-label" for="autoSizingCheck">
+                                                        <%= _.get(user,'name','') %>
+                                                    </label>
+                                                </div>
+                                                <% } %>
+                                    </div>
+                                </div>
                                 <div class="col-lg-6 col-sm-12 my-2 my-md-0 pt-2">
                                     <div class="input-group">
                                         <div class="input-group-prepend">

@@ -95,7 +95,7 @@ async function addUser(req: Request, res: Response): Promise<void> {
   const userRepository = getRepository(User);
   const reqUser = {
     ...req.body,
-    sectionId: +req.body.sectionId,
+    sectionId: +req.body.sectionId || null,
     userFlag: +req.body.userFlag,
   };
   const newUser = new CreateUserDTO(reqUser);
@@ -145,7 +145,7 @@ async function editUser(req: Request, res: Response): Promise<void> {
   const userRepository = getRepository(User);
   const reqUser = {
     ...req.body,
-    sectionId: +req.body.sectionId,
+    sectionId: +req.body.sectionId || null,
     userFlag: +req.body.userFlag,
   };
   const user =

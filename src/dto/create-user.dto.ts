@@ -21,15 +21,14 @@ export class CreateUserDTO {
   })
   email: string;
 
-  @IsNotEmpty({ message: Message.ERROR.ECL002('Name') })
-  @IsString()
+  @IsNotEmpty({ message: Message.ERROR.ECL002('User Name') })
   username: string;
 
-  @IsNotEmpty({ message: Message.ERROR.ECL002('User Name') })
+  @IsNotEmpty({ message: Message.ERROR.ECL002('Full Name') })
   @IsString()
   @MaxLength(50, {
     message: (args: ValidationArguments): string =>
-      Message.ERROR.ECL011('User Name', '$constraint1', args.value.length),
+      Message.ERROR.ECL011('Full Name', '$constraint1', args.value.length),
   })
   name: string;
 
@@ -37,8 +36,6 @@ export class CreateUserDTO {
   @IsNumber({}, { message: Message.ERROR.ECL002('User Flag') })
   userFlag: UserRole;
 
-  @IsNotEmpty({ message: Message.ERROR.ECL002('Section') })
-  @IsNumber()
   sectionId: number;
 
   @IsNotEmpty({ message: Message.ERROR.ECL002('Joining Date') })
@@ -56,6 +53,7 @@ export class CreateUserDTO {
   constructor(createUserDTO: CreateUserDTO) {
     this.email = createUserDTO.email;
     this.name = createUserDTO.name;
+    this.username = createUserDTO.username;
     this.userFlag = createUserDTO.userFlag;
     this.sectionId = createUserDTO.sectionId;
     this.joiningDate = createUserDTO.joiningDate;

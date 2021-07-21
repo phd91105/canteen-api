@@ -24,10 +24,13 @@ export class EditUserDTO {
   email: string;
 
   @IsNotEmpty({ message: Message.ERROR.ECL002('User Name') })
+  username: string;
+
+  @IsNotEmpty({ message: Message.ERROR.ECL002('Full Name') })
   @IsString()
   @MaxLength(50, {
     message: (args: ValidationArguments): string =>
-      Message.ERROR.ECL011('User Name', '$constraint1', args.value.length),
+      Message.ERROR.ECL011('Full Name', '$constraint1', args.value.length),
   })
   name: string;
 
@@ -35,8 +38,6 @@ export class EditUserDTO {
   @IsNumber({}, { message: Message.ERROR.ECL002('User Flag') })
   userFlag: UserRole;
 
-  @IsNotEmpty({ message: Message.ERROR.ECL002('Section') })
-  @IsNumber()
   sectionId: number;
 
   @IsNotEmpty({ message: Message.ERROR.ECL002('Joining Date') })
@@ -55,6 +56,7 @@ export class EditUserDTO {
   constructor(editUserDTO: EditUserDTO) {
     this.email = editUserDTO.email;
     this.name = editUserDTO.name;
+    this.username = editUserDTO.username;
     this.userFlag = editUserDTO.userFlag;
     this.sectionId = editUserDTO.sectionId;
     this.joiningDate = editUserDTO.joiningDate;

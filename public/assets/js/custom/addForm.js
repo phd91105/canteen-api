@@ -16,6 +16,7 @@ $(function () {
       form.submit();
     },
     rules: {
+      username: { required: true, maxlength: 50 },
       name: { required: true, maxlength: 50 },
       email: {
         required: true,
@@ -32,9 +33,6 @@ $(function () {
       passwordConfirmation: {
         required: true,
         equalTo: '[name="password"]',
-      },
-      sectionId: {
-        required: true,
       },
     },
     messages: {
@@ -76,9 +74,6 @@ $(function () {
         minlength: Message.ERROR.ECL015,
         maxlength: Message.ERROR.ECL015,
         equalTo: Message.ERROR.ECL016,
-      },
-      sectionId: {
-        required: Message.ERROR.ECL002('Section'),
       },
     },
   });
