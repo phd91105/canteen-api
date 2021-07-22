@@ -11,6 +11,10 @@ import { userRouter } from './user.route';
 const appRouter: Router = Router();
 
 appRouter.use('/api', apiRouter);
+appRouter.get('/chat', (_, res: Response): void => {
+  res.render('chat', { layout: false });
+  return;
+});
 appRouter.use(authRouter);
 appRouter.use(authenticate, userRouter);
 appRouter.use(authenticate, sectionRouter);
