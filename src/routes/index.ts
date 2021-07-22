@@ -27,7 +27,7 @@ appRouter.use(authenticate, catRouter);
 appRouter.use(authenticate, orderRouter);
 appRouter.all('*', (_, res: Response) =>
   res.render('error/error', {
-    layout: false,
+    layout: 'layout/errorLayout',
     code: 404,
     level: 'danger',
     title: 'Not Found.',

@@ -43,7 +43,7 @@ async function vnpayCheckout(req: Request, res: Response): Promise<void> {
     res.status(400);
     // res.render('error/error', { layout: false, message: 'Bad request' });
     res.render('error/error', {
-      layout: false,
+      layout: 'layout/errorLayout',
       code: 400,
       level: 'danger',
       title: 'Bad Request.',
@@ -64,7 +64,7 @@ async function vnpayCallback(req: Request, res: Response): Promise<void> {
       });
       // res.json({ message: 'Paid success' }).status(200);
       res.render('error/error', {
-        layout: false,
+        layout: 'layout/errorLayout',
         code: 200,
         level: 'success',
         title: 'Success.',
@@ -75,7 +75,7 @@ async function vnpayCallback(req: Request, res: Response): Promise<void> {
       res.status(400);
       // return res.json({ message: 'Bad request' });
       res.render('error/error', {
-        layout: false,
+        layout: 'layout/errorLayout',
         code: 400,
         level: 'danger',
         title: 'Bad Request.',
@@ -85,7 +85,7 @@ async function vnpayCallback(req: Request, res: Response): Promise<void> {
     }
   } else {
     res.render('error/error', {
-      layout: false,
+      layout: 'layout/errorLayout',
       code: 202,
       level: 'warning',
       title: 'Accepted.',

@@ -99,7 +99,7 @@ async function resetPassword(req: Request, res: Response): Promise<void> {
   });
   infoLog(req, 'Reset password success');
   res.render('error/error', {
-    layout: false,
+    layout: 'layout/errorLayout',
     code: 200,
     level: 'success',
     title: 'Success.',
