@@ -4,10 +4,12 @@
   "port": 3306,
   "username": "phamduyt_1",
   "password": "Tdpamm00",
-  "database": "phamduyt_cantin20210719",
-  "entities": ["dist/**/*{.ts,.js}"],
-  "synchronize": true,
-  "migrations": ["src/migrations/*.ts", "dist/migrations/*{.ts,.js}"],
+  "database": "phamduyt_cantin20210722",
+  "synchronize": false,
+  "logging": false,
+  "entities": ["src/models/*.ts"],
+  "migrations": ["src/migration/*.ts"],
+  "subscribers": ["src/subscriber/*.ts"],
   "cli": {
     "migrationsDir": "src/migrations"
   }
