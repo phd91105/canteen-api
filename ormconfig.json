@@ -5,7 +5,7 @@
   "username": "phamduyt_1",
   "password": "Tdpamm00",
   "database": "phamduyt_cantin20210719",
-  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "entities": ["dist/**/*{.ts,.js}"],
   "synchronize": true,
   "migrations": ["src/migrations/*.ts", "dist/migrations/*{.ts,.js}"],
   "cli": {
