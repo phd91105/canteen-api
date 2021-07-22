@@ -5,11 +5,9 @@
   "username": "phamduyt_1",
   "password": "Tdpamm00",
   "database": "phamduyt_cantin20210722",
-  "synchronize": false,
-  "logging": false,
-  "entities": ["src/models/*.ts"],
-  "migrations": ["src/migration/*.ts"],
-  "subscribers": ["src/subscriber/*.ts"],
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "synchronize": true,
+  "migrations": ["src/migrations/*.ts", "dist/migrations/*{.ts,.js}"],
   "cli": {
     "migrationsDir": "src/migrations"
   }
