@@ -7,6 +7,7 @@ import { OrderDetails } from '../models/orderDetails.model';
 import { Order } from '../models/order.model';
 import { Cart } from '../models/cart.model';
 import 'dotenv/config';
+import { FoodRating } from '../models/rating';
 
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DATABASE_NAME } =
   process.env;
@@ -19,5 +20,14 @@ export const connectdb: Promise<Connection> = createConnection({
   database: DATABASE_NAME,
   synchronize: false,
   logging: false,
-  entities: [User, Section, Food, Category, Order, OrderDetails, Cart],
+  entities: [
+    User,
+    Section,
+    Food,
+    Category,
+    Order,
+    OrderDetails,
+    Cart,
+    FoodRating,
+  ],
 });
