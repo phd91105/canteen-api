@@ -26,7 +26,13 @@ appRouter.use(authenticate, foodRouter);
 appRouter.use(authenticate, catRouter);
 appRouter.use(authenticate, orderRouter);
 appRouter.all('*', (_, res: Response) =>
-  res.status(404).json({ message: 'not found' }),
+  res.render('error/error', {
+    layout: false,
+    code: 404,
+    level: 'danger',
+    title: 'Not Found.',
+    message: 'Trang bạn yêu cầu không tồn tại, vui lòng thử lại',
+  }),
 );
 
 export default appRouter;

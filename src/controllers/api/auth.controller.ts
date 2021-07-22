@@ -91,14 +91,22 @@ function renderResetPassword(req: Request, res: Response): void {
   }
 }
 
-async function resetPassword(req: Request, res: Response): Promise<Response> {
+async function resetPassword(req: Request, res: Response): Promise<void> {
   const { token } = req.query;
   const decoded = extractJWT(<string>token);
   await getRepository(User).update(decoded.uid, {
     password: bcrypt.hashSync(req.body.password, 12),
   });
   infoLog(req, 'Reset password success');
-  return res.json({ message: 'Reset password success' }).status(200);
+  res.render('error/error', {
+    layout: false,
+    code: 200,
+    level: 'success',
+    title: 'Success.',
+    message: 'Mật khẩu đã được reset, vui lòng đăng nhập lại !',
+  });
+  return;
+  // return res.json({ message: 'Reset password success' }).status(200);
 }
 
 export { login, register, sendResetLink, resetPassword, renderResetPassword };
