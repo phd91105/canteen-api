@@ -1,4 +1,4 @@
-import { Response, Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { authenticate } from '../middlewares/auth.middleware';
 import apiRouter from './api';
 import { authRouter } from './auth.route';
@@ -13,6 +13,10 @@ const appRouter: Router = Router();
 appRouter.use('/api', apiRouter);
 appRouter.get('/chat', (_, res: Response): void => {
   res.render('chat', { layout: false });
+  return;
+});
+appRouter.get('/comment/:id', (req: Request, res: Response): void => {
+  res.render('comment', { layout: false, id: req.params.id });
   return;
 });
 appRouter.use(authRouter);
