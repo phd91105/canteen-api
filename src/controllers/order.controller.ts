@@ -6,6 +6,7 @@ import { OrderDetails } from '../models/orderDetails.model';
 import lodash from 'lodash';
 import moment from 'moment';
 import { Food } from '../models/food.model';
+import { OrderStatus } from '../constants';
 
 async function getOrderList(req: Request, res: Response): Promise<void> {
   req.session!.input = req.query;
@@ -76,4 +77,31 @@ async function updateOrderStatus(req: Request, res: Response): Promise<void> {
   res.redirect('/orders');
 }
 
-export { getOrderList, renderEditOrderDetails, updateOrderStatus };
+async function getSumByDay(req: Request, res: Response): Promise<void> {
+  const orderRepository = getRepository(Order);
+  const list1 = await orderRepository
+    .createQueryBuilder('order')
+    .select('order.createdAt', 'day')
+    .where({
+      status: OrderStatus.COMPLETED,
+    })
+    .groupBy('DAY(order.createdAt)')
+    .getRawMany();
+  const list2 = await orderRepository
+    .createQueryBuilder('order')
+    .select('SUM(order.total)', 'sum')
+    .where({
+      status: OrderStatus.COMPLETED,
+    })
+    .groupBy('DAY(order.createdAt)')
+    .getRawMany();
+  res.render('sales/salesList', {
+    title: 'Sales by Day',
+    list1,
+    list2,
+    _: lodash,
+    moment: moment,
+    session: req.session,
+  });
+}
+export { getOrderList, renderEditOrderDetails, updateOrderStatus, getSumByDay };

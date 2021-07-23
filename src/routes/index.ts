@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { getSumByDay } from '../controllers/order.controller';
 import { authenticate } from '../middlewares/auth.middleware';
 import apiRouter from './api';
 import { authRouter } from './auth.route';
@@ -19,6 +20,8 @@ appRouter.get('/comment/:id', (req: Request, res: Response): void => {
   res.render('comment', { layout: false, id: req.params.id });
   return;
 });
+appRouter.get('/stats', authenticate, getSumByDay);
+
 appRouter.use(authRouter);
 appRouter.use(authenticate, userRouter);
 appRouter.use(authenticate, sectionRouter);
