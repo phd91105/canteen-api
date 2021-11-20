@@ -77,7 +77,7 @@ async function sendResetLink(req: Request, res: Response): Promise<Response> {
 function renderResetPassword(req: Request, res: Response): void {
   const { token } = req.query;
   try {
-    extractJWT(<string>token);
+    extractJWT(<any>token);
     res.render('auth/resetPassword', {
       token: token,
       layout: 'layout/authLayout',
@@ -93,7 +93,7 @@ function renderResetPassword(req: Request, res: Response): void {
 
 async function resetPassword(req: Request, res: Response): Promise<void> {
   const { token } = req.query;
-  const decoded = extractJWT(<string>token);
+  const decoded = extractJWT(<any>token);
   await getRepository(User).update(decoded.uid, {
     password: bcrypt.hashSync(req.body.password, 12),
   });
