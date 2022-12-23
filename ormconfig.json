@@ -1,13 +1,13 @@
 {
   "type": "mysql",
-  "host": "103.97.125.244",
+  "host": "db.phamduy.me",
   "port": 3306,
-  "username": "phamduyt_1",
+  "username": "gjmhqdqv_ct",
   "password": "Tdpamm00",
-  "database": "phamduyt_cantin20210719",
+  "database": "gjmhqdqv_ct",
   "entities": ["dist/**/*.entity{.ts,.js}"],
   "synchronize": true,
-  "migrations": ["src/migrations/*.ts", "dist/migrations/*{.ts,.js}"],
+  "migrations": ["dist/migrations/*{.ts,.js}"],
   "cli": {
     "migrationsDir": "src/migrations"
   }
